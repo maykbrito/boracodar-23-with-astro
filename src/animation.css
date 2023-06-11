@@ -1,19 +1,11 @@
-@keyframes slidein {
+@keyframes appear {
   0% {
-    transform: translateX(50%);
+    scale: .7;
     opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
   }
 }
 
 @keyframes slideout {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
   100% {
     transform: translateX(50%);
     opacity: 0;
@@ -29,7 +21,7 @@ form {
 }
 
 .form-step.active {
-  animation: slidein 200ms 100ms ease-in-out both;
+  animation: appear 200ms 100ms ease-in-out both;
 }
 
 .hide {
