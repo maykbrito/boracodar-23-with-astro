@@ -1,0 +1,37 @@
+@keyframes slidein {
+  0% {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideout {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+}
+
+form {
+  overflow: hidden;
+}
+
+.form-step {
+  animation: slideout 200ms ease-in-out forwards;
+}
+
+.form-step.active {
+  animation: slidein 200ms 100ms ease-in-out both;
+}
+
+.hide {
+  display: none;
+}

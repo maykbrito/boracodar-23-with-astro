@@ -1,0 +1,15 @@
+---
+import Input from "../Input.astro";
+---
+<div class="form-step hide">
+  <div class="content">
+    <Input id="business-name" label="Nome da empresa" placeholder="Qual é o nome da empresa" type="text" />
+    <Input id="business-colab-numbers" label="Número de funcionários" placeholder="Digite seu número de colaboradores" type="text" />
+    <Input id="business-about" label="Sobre seu negócio" placeholder="Fale um pouco sobre seus produtos e serviços" type="textarea" />
+  </div>
+
+  <div class="button-wrapper">
+    <button class="btn secondary" data-prev type="button">VOLTAR</button>
+    <button class="btn primary" data-next type="button">CONTINUAR</button>
+  </div>
+</div>

@@ -1,81 +1,107 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
----
+import StepProgress from '../components/StepProgress.astro';
+import Step1 from '../components/steps/Step1.astro';
+import Step2 from '../components/steps/Step2.astro';
+import Step3 from '../components/steps/Step3.astro';
 
-<Layout title="Welcome to Astro.">
+import '../animation.css'
+import '../form.css'
+---
+<Layout title="BoraCodar#23">
 	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
+		<form>
+			<StepProgress />
+			<Step1 />
+			<Step2 />
+			<Step3 />
+		</form>
 	</main>
 </Layout>
 
 <style>
 	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
+		width: 592px
 	}
 </style>
+
+<script>
+	globalThis.content = {}
+	let currentStep = 0;
+	const form = document.querySelector('form');
+
+	form.addEventListener('click', (e) => {
+		const currentActions = {
+			prev: e.target.matches("[data-prev]"),
+			next: e.target.matches("[data-next]")
+		}
+
+		Object.keys(currentActions).forEach(key => {
+			if(currentActions[key]) {
+				actions[key]()
+				updateActiveStep()
+				updateProgressStep()
+			}
+		})
+	})
+
+	const actions = {
+		next() {
+			if(currentStep >= formSteps.length) return
+			if(!isValidInputs()) return
+			currentStep++
+		},
+
+		prev() {
+			if(currentStep == 0) return
+			currentStep--
+		}
+	}
+
+	form.addEventListener('submit', e => {
+		e.preventDefault()
+		console.log(globalThis.content)
+	})
+	
+	const formSteps = document.querySelectorAll('.form-step')
+
+	function updateActiveStep() {
+		formSteps.forEach(step => step.classList.remove('active'))
+		formSteps[currentStep].classList.add('active')
+	}
+
+	/* progress update */
+	const progressSteps = document.querySelectorAll('.step-progress > div')
+	function updateProgressStep() {
+		progressSteps.forEach((step, idx) => {
+			step.classList.remove('active')
+			step.classList.remove('done')
+			
+			if(idx < currentStep + 1) {
+				step.classList.add('active')
+			}
+			
+			if(idx < currentStep) {
+				step.classList.add('done')
+			}
+		})
+	}
+
+	/* validation */
+	function isValidInputs() {
+		const currentFormStep = formSteps[currentStep]
+		const formFields = [...currentFormStep.querySelectorAll('input'), ...currentFormStep.querySelectorAll('textarea')]
+		return formFields.every(input => input.reportValidity())
+	}
+
+	/* animation */
+	formSteps.forEach(formStep =>{
+		function addHide() {
+			formStep.classList.add('hide')
+		}
+		formStep.addEventListener('animationend', e => {
+			addHide()
+			formSteps[currentStep].classList.remove('hide')
+		})
+	})
+</script>

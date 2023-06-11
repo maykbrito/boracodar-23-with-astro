@@ -7,10 +7,15 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 	<head>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
+
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
+		<meta name="description" content="#boracodar 22">
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -21,16 +26,38 @@ const { title } = Astro.props;
 	</body>
 </html>
 <style is:global>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+	}
+
 	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+		--color-base-white: #ffffff;
+		--color-base-gray-100: #e1e1e6;
+		--color-base-gray-200: #8c8c99;
+		--color-base-gray-300: #7c7c8a;
+		--color-base-gray-400: #323238;
+		--color-feedback-sucess-color: #1d8841;
+		--color-produto-purple-light: #8257e5;
+		--color-produto-purple-mid: #633bbc;
+
 	}
 	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
+		background-color: var(--color-base-white);
 	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+	
+	html, body, button, input, textarea {
+		font-family: 'IBM Plex Sans';
+		font-size: 16px;
+		line-height: 150%;
+	}
+
+	body {
+		height: 100vh;
+		display: grid;
+		place-content: center;
 	}
 </style>

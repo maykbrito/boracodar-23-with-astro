@@ -1,0 +1,68 @@
+<div class="step-progress">
+  <div class="active">Contato</div>
+  <img src="/arrow.svg" alt="">
+  <div>Empresa</div>
+  <img src="/arrow.svg" alt="">
+  <div>Projeto</div>
+</div>
+
+<style>
+  .step-progress {
+    display: flex;
+		align-items: center;
+		gap: 40px;
+    
+    border-bottom: 1px solid var(--color-base-gray-100);
+    padding-bottom: 32px;
+	}
+
+	.step-progress div {
+    font-weight: 700;
+
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		color: var(--color-base-gray-200);
+	}
+
+	.step-progress div::before {
+    content: "";
+    display: block;
+		background: var(--color-base-gray-100);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    font-weight: 700;
+		font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-base-gray-200);
+	}
+
+	.step-progress .active::before {
+		background-color: var(--color-produto-purple-mid);
+		color: var(--color-base-white)
+	}
+	
+	.step-progress .active {
+		color: var(--color-base-gray-400)
+	}
+
+  /* counter */
+  .step-progress {
+    counter-reset: step; /* create counter variable any name */
+  }
+  .step-progress div::before {
+    counter-increment: step; /* increment by 1 */
+    content: counter(step); /* count it as the content */
+  }
+
+  /* done */
+  .step-progress .done::before {
+    content: '✔';
+    background: var(--color-feedback-sucess-color);
+    color: var(--color-base-white)
+  }
+</style>

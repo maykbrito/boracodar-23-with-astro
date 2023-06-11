@@ -1,0 +1,45 @@
+---
+const {id, label, placeholder, type, required } = Astro.props;
+---
+<div class="input-wrapper">
+	<label for="name">{label}</label>
+
+	{type == 'textarea' ? (
+		<textarea id={id}  name={id} placeholder={placeholder} {required} ></textarea>
+	) : (
+		<input type={type} id={id} name={id} placeholder={placeholder} {required} />
+	)}
+</div>
+
+<style>
+	label {
+		font-weight: 700;   
+		color: var(--color-base-gray-400);
+	}
+
+	input, textarea {
+		margin-top: 4px;
+
+		box-sizing: border-box;
+
+		padding: 16px;
+
+		width: 100%;
+
+		background: var(--color-base-white);
+
+		border: 1px solid var(--color-base-gray-100);
+		border-radius: 2px;
+	}
+
+	input::placeholder,
+	textarea::placeholder {
+		color: var(--color-base-gray-200);
+	}
+</style>
+
+<script define:vars={{id}}>
+	document.getElementById(id).addEventListener('input', (e) => {
+		globalThis.content[id] = e.currentTarget.value
+	})
+</script>
