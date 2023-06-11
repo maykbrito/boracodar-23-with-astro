@@ -1,5 +1,5 @@
 ---
-const {id, label, placeholder, type, required } = Astro.props;
+const {id, label, placeholder, type, required, numbersonly } = Astro.props;
 ---
 <div class="input-wrapper">
 	<label for="name">{label}</label>
@@ -7,7 +7,8 @@ const {id, label, placeholder, type, required } = Astro.props;
 	{type == 'textarea' ? (
 		<textarea id={id}  name={id} placeholder={placeholder} {required} ></textarea>
 	) : (
-		<input type={type} id={id} name={id} placeholder={placeholder} {required} />
+		<input type={type} id={id} name={id} placeholder={placeholder} {required}
+		onkeypress={ numbersonly ? "return /\\d/.test(event.key)" : "return true" }  />
 	)}
 </div>
 
